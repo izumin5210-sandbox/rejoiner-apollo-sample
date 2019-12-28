@@ -41,11 +41,13 @@ message User {
   // Optional. Organization which a user belongs to.
   string organization = 11;
   // Required. Unique integer ID.
-  string profile_image_url = 12;
+  uint32 permanent_id = 12;
+  // Required. Profile image URL.
+  string profile_image_url = 13;
   // Required. A flag whether this user is configured as team-only.
-  bool team_only = 13;
+  bool team_only = 14;
   // Optional. Twitter screen name.
-  string twitter_screen_name = 14;
+  string twitter_screen_name = 15;
   // Optional.  Website URL.
-  string website_url = 15;
+  string website_url = 16;
 }
