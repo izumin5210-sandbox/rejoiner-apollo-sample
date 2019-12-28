@@ -15,6 +15,9 @@ module QiitaPb
       self.service_name = 'qiita.UserService'
 
       rpc :GetUser, QiitaPb::GetUserRequest, QiitaPb::User
+      rpc :ListFollowers, QiitaPb::ListFollowersRequest, QiitaPb::ListFollowersResponse
+      rpc :ListFollowees, QiitaPb::ListFolloweesRequest, QiitaPb::ListFolloweesResponse
+      rpc :ListStockers, QiitaPb::ListStockersRequest, QiitaPb::ListStockersResponse
     end
 
     Stub = Service.rpc_stub_class

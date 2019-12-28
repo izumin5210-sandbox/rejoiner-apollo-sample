@@ -26,10 +26,34 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :twitter_screen_name, :string, 15
       optional :website_url, :string, 16
     end
+    add_message "qiita.ListFollowersRequest" do
+      optional :user_id, :string, 1
+    end
+    add_message "qiita.ListFollowersResponse" do
+      repeated :users, :message, 1, "qiita.User"
+    end
+    add_message "qiita.ListFolloweesRequest" do
+      optional :user_id, :string, 1
+    end
+    add_message "qiita.ListFolloweesResponse" do
+      repeated :users, :message, 1, "qiita.User"
+    end
+    add_message "qiita.ListStockersRequest" do
+      optional :item_id, :string, 1
+    end
+    add_message "qiita.ListStockersResponse" do
+      repeated :users, :message, 1, "qiita.User"
+    end
   end
 end
 
 module QiitaPb
   GetUserRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("qiita.GetUserRequest").msgclass
   User = Google::Protobuf::DescriptorPool.generated_pool.lookup("qiita.User").msgclass
+  ListFollowersRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("qiita.ListFollowersRequest").msgclass
+  ListFollowersResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("qiita.ListFollowersResponse").msgclass
+  ListFolloweesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("qiita.ListFolloweesRequest").msgclass
+  ListFolloweesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("qiita.ListFolloweesResponse").msgclass
+  ListStockersRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("qiita.ListStockersRequest").msgclass
+  ListStockersResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("qiita.ListStockersResponse").msgclass
 end

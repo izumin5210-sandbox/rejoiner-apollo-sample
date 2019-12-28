@@ -10,6 +10,9 @@ option ruby_package = "QiitaPb";
 
 service UserService {
   rpc GetUser(GetUserRequest) returns (User) {}
+  rpc ListFollowers(ListFollowersRequest) returns (ListFollowersResponse) {}
+  rpc ListFollowees(ListFolloweesRequest) returns (ListFolloweesResponse) {}
+  rpc ListStockers(ListStockersRequest) returns (ListStockersResponse) {}
 }
 
 message GetUserRequest {
@@ -50,4 +53,31 @@ message User {
   string twitter_screen_name = 15;
   // Optional.  Website URL.
   string website_url = 16;
+}
+
+message ListFollowersRequest {
+  // Required. User ID.
+  string user_id = 1;
+}
+
+message ListFollowersResponse {
+  repeated User users = 1;
+}
+
+message ListFolloweesRequest {
+  // Required. User ID.
+  string user_id = 1;
+}
+
+message ListFolloweesResponse {
+  repeated User users = 1;
+}
+
+message ListStockersRequest {
+  // Required. Item ID.
+  string item_id = 1;
+}
+
+message ListStockersResponse {
+  repeated User users = 1;
 }

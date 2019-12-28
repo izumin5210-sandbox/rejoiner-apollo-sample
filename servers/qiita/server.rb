@@ -51,6 +51,33 @@ class UserServer < QiitaPb::UserService::Service
     resp = qiita_client.get_user(req.user_id)
     QiitaPb::User.from_hash(resp.body)
   end
+
+  # @param req [QiitaPb::ListFollowersRequest]
+  # @param call [GRPC::ActiveCall]
+  # @return [QiitaPb::ListFollowersRequest]
+  def list_followers(req, _call)
+    resp = qiita_client.list_user_followers(req.user_id)
+    users = resp.body.map { |h| QiitaPb::User.from_hash(h) }
+    QiitaPb::ListFollowersResponse.new(users: users)
+  end
+
+  # @param req [QiitaPb::ListFolloweesRequest]
+  # @param call [GRPC::ActiveCall]
+  # @return [QiitaPb::ListFolloweesRequest]
+  def list_followees(req, _call)
+    resp = qiita_client.list_user_followees(req.user_id)
+    users = resp.body.map { |h| QiitaPb::User.from_hash(h) }
+    QiitaPb::ListFolloweesResponse.new(users: users)
+  end
+
+  # @param req [QiitaPb::ListStockersRequest]
+  # @param call [GRPC::ActiveCall]
+  # @return [QiitaPb::ListStockersRequest]
+  def list_stockers(req, _call)
+    resp = qiita_client.list_item_stockers(req.item_id)
+    users = resp.body.map { |h| QiitaPb::User.from_hash(h) }
+    QiitaPb::ListStockersResponse.new(users: users)
+  end
 end
 
 class ItemServer < QiitaPb::ItemService::Service
@@ -63,6 +90,15 @@ class ItemServer < QiitaPb::ItemService::Service
     resp = qiita_client.list_user_items(req.user_id)
     items = resp.body.map { |h| QiitaPb::Item.from_hash(h) }
     QiitaPb::ListItemsResponse.new(items: items)
+  end
+
+  # @param req [QiitaPb::ListStocksRequest]
+  # @param call [GRPC::ActiveCall]
+  # @return [QiitaPb::ListStocksResponse]
+  def list_stocks(req, _call)
+    resp = qiita_client.list_user_stocks(req.user_id)
+    items = resp.body.map { |h| QiitaPb::Item.from_hash(h) }
+    QiitaPb::ListStocksResponse.new(items: items)
   end
 end
 

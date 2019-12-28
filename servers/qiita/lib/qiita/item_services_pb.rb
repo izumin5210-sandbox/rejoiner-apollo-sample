@@ -15,6 +15,7 @@ module QiitaPb
       self.service_name = 'qiita.ItemService'
 
       rpc :ListItems, QiitaPb::ListItemsRequest, QiitaPb::ListItemsResponse
+      rpc :ListStocks, QiitaPb::ListStocksRequest, QiitaPb::ListStocksResponse
     end
 
     Stub = Service.rpc_stub_class

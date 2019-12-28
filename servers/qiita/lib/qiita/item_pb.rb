@@ -35,6 +35,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
       repeated :versions, :string, 2
     end
+    add_message "qiita.ListStocksRequest" do
+      optional :user_id, :string, 1
+    end
+    add_message "qiita.ListStocksResponse" do
+      repeated :items, :message, 1, "qiita.Item"
+    end
   end
 end
 
@@ -43,4 +49,6 @@ module QiitaPb
   ListItemsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("qiita.ListItemsResponse").msgclass
   Item = Google::Protobuf::DescriptorPool.generated_pool.lookup("qiita.Item").msgclass
   Item::Tag = Google::Protobuf::DescriptorPool.generated_pool.lookup("qiita.Item.Tag").msgclass
+  ListStocksRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("qiita.ListStocksRequest").msgclass
+  ListStocksResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("qiita.ListStocksResponse").msgclass
 end

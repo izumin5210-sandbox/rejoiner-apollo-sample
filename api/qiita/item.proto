@@ -13,6 +13,7 @@ import "qiita/user.proto";
 
 service ItemService {
   rpc ListItems(ListItemsRequest) returns (ListItemsResponse) {}
+  rpc ListStocks(ListStocksRequest) returns (ListStocksResponse) {}
 }
 
 message ListItemsRequest {
@@ -63,4 +64,13 @@ message Item {
   qiita.User user = 15;
   // Optional.  The number of views.
   uint32 page_views_count = 16;
+}
+
+message ListStocksRequest {
+  // Required. User ID.
+  string user_id = 1;
+}
+
+message ListStocksResponse {
+  repeated Item items = 1;
 }
