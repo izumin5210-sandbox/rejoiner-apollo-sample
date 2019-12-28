@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package qiita;
+
+option go_package = "QiitaPb";
+option java_multiple_files = true;
+option java_outer_classname = "QiitaPb";
+option java_package = "dev.izumin5210.sandbox.qiita";
+option ruby_package = "QiitaPb";
+
+service UserService {
+  rpc GetUser(GetUserRequest) returns (User) {}
+}
+
+message GetUserRequest {
+  // Required. User ID.
+  string user_id = 1;
+}
+
+message User {
+  // Optional. self-description.
+  string description = 1;
+  // Optional. Facebook ID.
+  string facebook_id = 2;
+  // Required. Followees count.
+  uint32 followees_count = 3;
+  // Required. Followers count.
+  uint32 followers_count = 4;
+  // Optional. GitHub ID.
+  string github_login_name = 5;
+  // Required. User ID.
+  string id = 6;
+  // Required. How many items a user posted on qiita.com (Items on Qiita Team are not included).
+  uint32 items_count = 7;
+  // Optional. LinkedIn ID.
+  string linkedin_id = 8;
+  // Optional. Location
+  string location = 9;
+  // Optional. Customized user name.
+  string name = 10;
+  // Optional. Organization which a user belongs to.
+  string organization = 11;
+  // Required. Unique integer ID.
+  string profile_image_url = 12;
+  // Required. A flag whether this user is configured as team-only.
+  bool team_only = 13;
+  // Optional. Twitter screen name.
+  string twitter_screen_name = 14;
+  // Optional.  Website URL.
+  string website_url = 15;
+}

@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package qiita;
+
+option go_package = "QiitaPb";
+option java_multiple_files = true;
+option java_outer_classname = "QiitaPb";
+option java_package = "dev.izumin5210.sandbox.qiita";
+option ruby_package = "QiitaPb";
+
+import "google/protobuf/timestamp.proto";
+import "qiita/user.proto";
+
+service ItemService {
+  rpc ListItems(ListItemsRequest) returns (ListItemsResponse) {}
+}
+
+message ListItemsRequest {
+  // Required. User ID.
+  string user_id = 1;
+}
+
+message ListItemsResponse {
+  repeated Item items = 1;
+}
+
+message Item {
+  // Required. Item body in HTML.
+  string rendered_body = 1;
+  // Required. Item body in Markdown.
+  string body = 2;
+  // Required. A flag whether this item is co-edit mode (only available on Qiita Team).
+  bool coediting = 3;
+  // Required. Comments count.
+  uint32 comments_count = 4;
+  // Required. Date-time when this data was created.
+  google.protobuf.Timestamp created_at = 5;
+  // Required. Represents a group on Qiita Team.
+  string group = 6;
+  // Required. An unique item ID
+  string id = 7;
+  // Required. Likes count (only available on Qiita).
+  uint32 likes_count = 8;
+  // Required. A flag whether this item is private (only available on Qiita).
+  bool private = 9;
+  // Required. Emoji reactions count (only availabble on Qiita Team).
+  uint32 reactions_count = 10;
+  // Required. A list of tags.
+  repeated Tag tags = 11;
+
+  message Tag {
+    string name = 1;
+    repeated string versions = 2;
+  }
+
+  // Required. The title of this item.
+  string title = 12;
+  // Required. Date-time when this data was updated.
+  google.protobuf.Timestamp updated_at = 13;
+  // Required. The URL of this item.
+  string url = 14;
+  // Required. A Qiita user (a.k.a. account)
+  qiita.User user = 15;
+  // Optional.  The number of views.
+  uint32 page_views_count = 16;
+}
