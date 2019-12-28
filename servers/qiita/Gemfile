@@ -6,3 +6,6 @@ git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
 gem "grpc"
 gem "grpc-tools", require: false
+gem "google-protobuf"
+
+gem "qiita"
