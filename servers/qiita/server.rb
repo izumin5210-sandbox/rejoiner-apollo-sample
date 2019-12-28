@@ -60,7 +60,7 @@ class ItemServer < QiitaPb::ItemService::Service
   # @param call [GRPC::ActiveCall]
   # @return [QiitaPb::ListItemsResponse]
   def list_items(req, _call)
-    resp = qiita_client.list_items(query: "user:#{req.user_id}")
+    resp = qiita_client.list_user_items(req.user_id)
     items = resp.body.map { |h| QiitaPb::Item.from_hash(h) }
     QiitaPb::ListItemsResponse.new(items: items)
   end
