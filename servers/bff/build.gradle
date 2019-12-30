@@ -1,0 +1,26 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm'
+    id 'idea'
+    id 'application'
+    id 'com.github.johnrengelman.shadow'
+}
+
+sourceCompatibility = 1.8
+mainClassName = 'dev.izumin.sandbox.rejoiner.bff.MainKt'
+
+sourceSets {
+    main.kotlin.srcDirs = main.java.srcDirs = ['src/main/kotlin']
+}
+
+dependencies {
+    api project(":api")
+    implementation Dependencies.KOTLIN_STD_LIB
+    implementation Dependencies.GRPC_NETTY
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions {
+        freeCompilerArgs = ["-XXLanguage:+InlineClasses"]
+    }
+}
