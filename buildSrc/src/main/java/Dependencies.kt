@@ -1,8 +1,8 @@
 object Dependencies {
     object Versions {
         const val KOTLIN = "1.3.60"
-        const val PROTOC = "3.9.1"
-        const val GRPC_JAVA = "1.24.0"
+        const val PROTOC = "3.11.2"
+        const val GRPC_JAVA = "1.26.0"
         const val GOOGLE_APIS_COMMON_PROTOS = "0.0.3"
         const val JAVAX_ANNOTATION = "1.3.2"
     }
