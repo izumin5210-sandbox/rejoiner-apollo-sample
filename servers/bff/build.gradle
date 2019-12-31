@@ -28,6 +28,9 @@ dependencies {
     implementation Dependencies.SLF4J
     implementation Dependencies.GUICE_SERVLET
     implementation Dependencies.FUTURE_CONVERTER_JAVA8_GUAVA
+
+    implementation Dependencies.KTOR_NETTY
+    implementation Dependencies.KTOR_GSON
 }
 
 compileKotlin {

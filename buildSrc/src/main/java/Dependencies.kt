@@ -1,12 +1,12 @@
 object Dependencies {
     object Versions {
         const val KOTLIN = "1.3.60"
-        const val PROTOBUF = "3.11.2"
+        const val PROTOBUF = "3.11.1"
         const val GRPC_JAVA = "1.26.0"
         const val GOOGLE_APIS_COMMON_PROTOS = "0.0.3"
         const val JAVAX_ANNOTATION = "1.3.2"
 
-        const val GUAVA = "28.0-jre"
+        const val GUAVA = "28.2-jre"
         const val PROTO_GOOGLE_COMMON_PROTOS = "1.16.0"
 
         const val REJOINER = "0.3.0"
@@ -14,6 +14,8 @@ object Dependencies {
         const val SLF4J = "1.6.2"
         const val GUICE = "4.2.0"
         const val FUTURE_CONVERTER_JAVA8_GUAVA = "1.1.0"
+
+        const val KTOR = "1.2.6"
     }
 
     const val KOTLIN_STD_LIB = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.KOTLIN}"
@@ -36,4 +38,7 @@ object Dependencies {
     const val SLF4J = "org.slf4j:slf4j-simple:${Versions.SLF4J}"
     const val GUICE_SERVLET = "com.google.inject.extensions:guice-servlet:${Versions.GUICE}"
     const val FUTURE_CONVERTER_JAVA8_GUAVA = "net.javacrumbs.future-converter:future-converter-java8-guava:${Versions.FUTURE_CONVERTER_JAVA8_GUAVA}"
+
+    const val KTOR_NETTY = "io.ktor:ktor-server-netty:${Versions.KTOR}"
+    const val KTOR_GSON = "io.ktor:ktor-gson:${Versions.KTOR}"
 }
