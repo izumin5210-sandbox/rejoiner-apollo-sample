@@ -16,6 +16,18 @@ dependencies {
     api project(":api")
     implementation Dependencies.KOTLIN_STD_LIB
     implementation Dependencies.GRPC_NETTY
+
+    implementation Dependencies.JAVAX_ANNOTATION
+    implementation Dependencies.PROTOBUF_JAVA_UTIL
+    implementation Dependencies.GUAVA
+    implementation Dependencies.PROTO_GOOGLE_COMMON_PROTOS
+
+    implementation Dependencies.REJOINER
+    implementation Dependencies.JETTY
+    implementation Dependencies.JETTY_SERVLET
+    implementation Dependencies.SLF4J
+    implementation Dependencies.GUICE_SERVLET
+    implementation Dependencies.FUTURE_CONVERTER_JAVA8_GUAVA
 }
 
 compileKotlin {
