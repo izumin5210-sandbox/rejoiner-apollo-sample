@@ -2,12 +2,13 @@ env:
   browser: true
   es6: true
 extends:
-  - 'plugin:react/recommended'
+  - "plugin:react/recommended"
+  - "plugin:prettier/recommended"
   - airbnb
 globals:
   Atomics: readonly
   SharedArrayBuffer: readonly
-parser: '@typescript-eslint/parser'
+parser: "@typescript-eslint/parser"
 parserOptions:
   ecmaFeatures:
     jsx: true
@@ -15,5 +16,5 @@ parserOptions:
   sourceType: module
 plugins:
   - react
-  - '@typescript-eslint'
+  - "@typescript-eslint"
 rules: {}
