@@ -23,7 +23,7 @@ class UserSchemaModule : SchemaModule() {
 
     @SchemaModification(addField = "followees", onType = User::class)
     fun userToFollowees(user: User, client: UserServiceGrpc.UserServiceFutureStub): ListenableFuture<List<User>> {
-        val req = ListFolloweesRequest.newBuilder().setUserId(user.name).build()
+        val req = ListFolloweesRequest.newBuilder().setUserId(user.id).build()
         return Futures.transform(
                 client.listFollowees(req),
                 Function { resp: ListFolloweesResponse? -> resp!!.usersList },
@@ -33,7 +33,7 @@ class UserSchemaModule : SchemaModule() {
 
     @SchemaModification(addField = "followers", onType = User::class)
     fun userToFollowers(user: User, client: UserServiceGrpc.UserServiceFutureStub): ListenableFuture<List<User>> {
-        val req = ListFollowersRequest.newBuilder().setUserId(user.name).build()
+        val req = ListFollowersRequest.newBuilder().setUserId(user.id).build()
         return Futures.transform(
                 client.listFollowers(req),
                 Function { resp: ListFollowersResponse? -> resp!!.usersList },
