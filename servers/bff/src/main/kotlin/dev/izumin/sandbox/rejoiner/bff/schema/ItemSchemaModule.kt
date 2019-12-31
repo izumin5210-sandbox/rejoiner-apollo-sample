@@ -17,13 +17,19 @@ import dev.izumin5210.sandbox.qiita.User
 import dev.izumin5210.sandbox.qiita.UserServiceGrpc
 
 class ItemSchemaModule : GrpcSchemaModule() {
-    @Query("listItem")
+    @Query("listItems")
     fun listItems(req: ListItemsRequest, client: ItemServiceGrpc.ItemServiceFutureStub): ListenableFuture<List<Item>> {
         return Futures.transform(
                 client.listItems(req),
                 Function { resp: ListItemsResponse? -> resp!!.itemsList },
                 MoreExecutors.directExecutor()
         )
+    }
+
+    @SchemaModification(addField = "items", onType = User::class)
+    private fun userToItems(user: User, client: ItemServiceGrpc.ItemServiceFutureStub): ListenableFuture<List<Item>> {
+        val req = ListItemsRequest.newBuilder().setUserId(user.id).build()
+        return listItems(req, client)
     }
 
     @SchemaModification(addField = "followers", onType = Item::class)
