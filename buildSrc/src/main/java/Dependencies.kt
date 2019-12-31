@@ -9,7 +9,7 @@ object Dependencies {
         const val GUAVA = "28.2-jre"
         const val PROTO_GOOGLE_COMMON_PROTOS = "1.16.0"
 
-        const val REJOINER = "0.3.0"
+        const val REJOINER = "0.2.0"
         const val JETTY = "9.3.8.v20160314"
         const val SLF4J = "1.6.2"
         const val GUICE = "4.2.0"
