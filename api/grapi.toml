@@ -1,0 +1,12 @@
+[protoc]
+protos_dir = "./protos"
+out_dir = "./go"
+import_dirs = [
+  "./protos",
+  '{{ module "github.com/grpc-ecosystem/grpc-gateway" }}',
+  '{{ module "github.com/grpc-ecosystem/grpc-gateway" }}/third_party/googleapis',
+]
+
+  [[protoc.plugins]]
+  name = "go"
+  args = { plugins = "grpc", paths = "source_relative" }
