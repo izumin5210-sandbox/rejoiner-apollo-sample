@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package github;
+
+option go_package = "github.com/izumin5210-sandbox/rejoiner-apollo-sample/api/go/github;github_pb";
+option java_multiple_files = true;
+option java_package = "dev.izumin5210.sandbox.github";
+
+message Plan {
+  string name = 1;
+  uint32 space = 2;
+  uint32 collaborators = 3;
+  uint32 private_repos = 4;
+  uint32 filled_seats = 5;
+  uint32 seats = 6;
+}

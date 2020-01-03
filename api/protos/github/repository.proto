@@ -1,0 +1,106 @@
+syntax = "proto3";
+
+package github;
+
+option go_package = "github.com/izumin5210-sandbox/rejoiner-apollo-sample/api/go/github;github_pb";
+option java_multiple_files = true;
+option java_package = "dev.izumin5210.sandbox.github";
+
+import "google/protobuf/timestamp.proto";
+import "github/organization.proto";
+import "github/user.proto";
+
+service RepositoryService {
+  rpc ListRepository(ListRepositoryRequest) returns (ListRepositoryResponse) {}
+}
+
+message ListRepositoryRequest {
+  // Required. User ID.
+  string login = 1;
+}
+
+message Repository {
+  int64 id = 1;
+  string node_id = 2;
+  github.User owner = 3;
+  string name = 4;
+  string full_name = 5;
+  string description = 6;
+  string homepage = 7;
+  CodeOfConduct code_of_conduct = 8;
+  string default_branch = 9;
+  string master_branch = 10;
+  google.protobuf.Timestamp created_at = 11;
+  google.protobuf.Timestamp pushed_at = 12;
+  google.protobuf.Timestamp updated_at = 13;
+  string html_url = 14;
+  string clone_url = 15;
+  string git_url = 16;
+  string mirror_url = 17;
+  string ssh_url = 18;
+  string svn_url = 19;
+  string language = 20;
+  bool fork = 21;
+  uint32 forks_count = 22;
+  uint32 network_count = 23;
+  uint32 openissues_count = 24;
+  uint32 stargazers_count = 25;
+  uint32 subscribers_count= 26;
+  uint32 watchers_count = 27;
+  uint32 size = 28;
+  bool auto_init = 29;
+  Repository parent = 30;
+  Repository source = 31;
+  Repository template_repository = 32;
+  github.Organization organization = 33;
+  map<string, bool> permissions = 34;
+  bool allow_rebase_merge = 35;
+  bool allow_squash_merge = 36;
+  bool allow_merge_commit = 37;
+  repeated string topics = 38;
+  bool archived = 39;
+  bool disabled = 40;
+
+  // Only provided when using RepositoriesService.Get while in preview
+  License license = 41;
+
+  // Additional mutable fields when creating and editing a repository
+  bool private = 42;
+  bool has_issues = 43;
+  bool has_wiki = 44;
+  bool has_pages = 45;
+  bool has_projects = 46;
+  bool has_downloads = 47;
+  bool is_template = 48;
+  string license_template = 49;
+  string gitignore_template = 50;
+
+  // Creating an organization repository. Required for non-owners.
+  int64 team_id = 51;
+
+  message CodeOfConduct {
+    string name = 1;
+    string key = 2;
+    string uRL = 3;
+    string body = 4;
+  }
+
+  message License {
+    string key = 1;
+    string name = 2;
+    string url = 3;
+    string spdx_id = 4;
+    string html_url = 5;
+    bool featured = 6;
+    string description = 7;
+    string implementation= 8;
+    repeated string permissions = 9;
+    repeated string conditions = 10;
+    repeated string limitations = 11;
+    string body = 12;
+  }
+}
+
+message ListRepositoryResponse {
+  repeated Repository repositories = 1;
+}

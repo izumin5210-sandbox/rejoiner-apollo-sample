@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package github;
+
+option go_package = "github.com/izumin5210-sandbox/rejoiner-apollo-sample/api/go/github;github_pb";
+option java_multiple_files = true;
+option java_package = "dev.izumin5210.sandbox.github";
+
+import "google/protobuf/timestamp.proto";
+import "github/plan.proto";
+
+service UserService {
+  rpc GetUser(GetUserRequest) returns (User) {}
+  rpc ListUser(ListUserRequest) returns (ListUserResponse) {}
+}
+
+message GetUserRequest {
+  // Required. User ID.
+  string login = 1;
+}
+
+message User {
+  string login = 1;
+  int64 id = 2;
+  string node_id = 3;
+  string avatar_url = 4;
+  string html_url = 5;
+  string gravatar_id = 6;
+  string name = 7;
+  string company = 8;
+  string blog = 9;
+  string location = 10;
+  string email = 11;
+  bool hireable = 12;
+  string bio = 13;
+  uint32 public_repos = 14;
+  uint32 public_gists = 15;
+  uint32 followers = 16;
+  uint32 following = 17;
+  google.protobuf.Timestamp created_at = 18;
+  google.protobuf.Timestamp updated_at = 19;
+  google.protobuf.Timestamp suspended_at = 20;
+  string type = 21;
+  bool site_admin = 22;
+  uint32 total_private_repos = 23;
+  uint32 owned_private_repos = 24;
+  uint32 private_gists = 25;
+  uint32 disk_usage = 26;
+  uint32 collaborators = 27;
+  bool two_factor_authentication = 28;
+  github.Plan plan = 29;
+  string ldap_dn = 30;
+}
+
+message ListUserRequest {
+  // Required. User IDs.
+  repeated string logins = 1;
+}
+
+message ListUserResponse {
+  repeated User users = 1;
+}
