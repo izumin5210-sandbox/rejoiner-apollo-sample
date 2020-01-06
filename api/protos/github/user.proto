@@ -11,7 +11,7 @@ import "github/plan.proto";
 
 service UserService {
   rpc GetUser(GetUserRequest) returns (User) {}
-  rpc ListUser(ListUserRequest) returns (ListUserResponse) {}
+  rpc ListUsers(ListUserRequest) returns (ListUserResponse) {}
 }
 
 message GetUserRequest {
