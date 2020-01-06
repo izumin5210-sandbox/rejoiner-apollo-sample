@@ -1,6 +1,7 @@
 package dev.izumin.sandbox.rejoiner.bff.schema
 
 import com.google.api.graphql.rejoiner.Query
+import com.google.api.graphql.rejoiner.SchemaModification
 import com.google.api.graphql.rejoiner.SchemaModule
 import com.google.common.base.Function
 import com.google.common.util.concurrent.Futures
@@ -11,6 +12,9 @@ import dev.izumin5210.sandbox.github.ListUsersRequest
 import dev.izumin5210.sandbox.github.ListUsersResponse
 import dev.izumin5210.sandbox.github.User
 import dev.izumin5210.sandbox.github.UserServiceGrpc
+import graphql.schema.DataFetchingEnvironment
+import net.javacrumbs.futureconverter.java8guava.FutureConverter
+import org.dataloader.DataLoaderRegistry
 
 
 class GitHubUserSchemaModule : SchemaModule() {
@@ -25,6 +29,18 @@ class GitHubUserSchemaModule : SchemaModule() {
                 client.listUsers(req),
                 Function { resp: ListUsersResponse? -> resp!!.usersList } ,
                 MoreExecutors.directExecutor()
+        )
+    }
+
+    @SchemaModification(addField = "githubAccount", onType = dev.izumin5210.sandbox.qiita.User::class)
+    fun qiitaUserToGitHubUser(user: dev.izumin5210.sandbox.qiita.User, environment: DataFetchingEnvironment): ListenableFuture<User?> {
+        if (user.githubLoginName.isEmpty()) return FutureConverter.toListenableFuture(null) // FIXME
+
+        return FutureConverter.toListenableFuture(
+                environment
+                        .getContext<DataLoaderRegistry>()
+                        .getDataLoader<String, User>("github/users")
+                        .load(user.githubLoginName)
         )
     }
 }

@@ -6,9 +6,11 @@ import com.google.api.graphql.rejoiner.SchemaProviderModule
 import com.google.inject.AbstractModule
 import com.google.inject.Guice
 import com.google.inject.Inject
+import com.google.inject.Provider
 import dev.izumin.sandbox.rejoiner.bff.client.GitHubUserClientModule
 import dev.izumin.sandbox.rejoiner.bff.client.QiitaItemClientModule
 import dev.izumin.sandbox.rejoiner.bff.client.QiitaUserClientModule
+import dev.izumin.sandbox.rejoiner.bff.loader.GitHubDataLoaderModule
 import dev.izumin.sandbox.rejoiner.bff.schema.GitHubUserSchemaModule
 import dev.izumin.sandbox.rejoiner.bff.schema.QiitaItemSchemaModule
 import dev.izumin.sandbox.rejoiner.bff.schema.QiitaUserSchemaModule
@@ -33,6 +35,7 @@ import io.ktor.routing.post
 import io.ktor.routing.routing
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
+import org.dataloader.DataLoaderRegistry
 import java.util.logging.Logger
 
 fun main(args: Array<String>) {
@@ -55,6 +58,11 @@ fun Application.module() {
                 }
             },
             SchemaProviderModule(),
+            object : AbstractModule() {
+                override fun configure() {
+                    install(GitHubDataLoaderModule())
+                }
+            },
             object : AbstractModule() {
                 override fun configure() {
                     install(QiitaUserSchemaModule())
@@ -86,6 +94,7 @@ data class GraphqlRequest(
 
 class Routes @Inject constructor(
         application: Application,
+        dataLoaderRegistryProvider: Provider<DataLoaderRegistry>,
         @Schema schema: GraphQLSchema
 ) {
     init {
@@ -94,6 +103,7 @@ class Routes @Inject constructor(
                 call.respondText(call.request.queryParameters["message"]!!)
             }
             post("/graphql") {
+                val dataLoaderRegistry = dataLoaderRegistryProvider.get()
                 val instrumentation = ChainedInstrumentation(
                         arrayListOf(
                                 GuavaListenableFutureSupport.listenableFutureInstrumentation(),
@@ -104,6 +114,8 @@ class Routes @Inject constructor(
 
                 val req = call.receive(GraphqlRequest::class)
                 val execInput = req.newExecutionInput()
+                        .dataLoaderRegistry(dataLoaderRegistry)
+                        .context(dataLoaderRegistry)
                         .build()
                 val result = graphql.execute(execInput)
 
