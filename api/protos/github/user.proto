@@ -11,7 +11,7 @@ import "github/plan.proto";
 
 service UserService {
   rpc GetUser(GetUserRequest) returns (User) {}
-  rpc ListUsers(ListUserRequest) returns (ListUserResponse) {}
+  rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {}
 }
 
 message GetUserRequest {
@@ -52,11 +52,11 @@ message User {
   string ldap_dn = 30;
 }
 
-message ListUserRequest {
+message ListUsersRequest {
   // Required. User IDs.
   repeated string logins = 1;
 }
 
-message ListUserResponse {
+message ListUsersResponse {
   repeated User users = 1;
 }

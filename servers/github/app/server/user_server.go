@@ -46,7 +46,7 @@ func (s *userServiceServerImpl) GetUser(ctx context.Context, req *github_pb.GetU
 	return toUserPb(&result.Users[0]), nil
 }
 
-func (s *userServiceServerImpl) ListUsers(ctx context.Context, req *github_pb.ListUserRequest) (*github_pb.ListUserResponse, error) {
+func (s *userServiceServerImpl) ListUsers(ctx context.Context, req *github_pb.ListUsersRequest) (*github_pb.ListUsersResponse, error) {
 	q := strings.Join(req.GetLogins(), " OR ") + " in:login type:user"
 	result, _, err := s.gc.Search.Users(ctx, q, nil)
 	if err != nil {
@@ -58,7 +58,7 @@ func (s *userServiceServerImpl) ListUsers(ctx context.Context, req *github_pb.Li
 		userByID[u.GetLogin()] = u
 	}
 
-	resp := &github_pb.ListUserResponse{}
+	resp := &github_pb.ListUsersResponse{}
 	for _, login := range req.GetLogins() {
 		if u, ok := userByID[login]; ok {
 			resp.Users = append(resp.Users, toUserPb(&u))
