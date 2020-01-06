@@ -1,8 +1,8 @@
 [protoc]
-protos_dir = "./protos"
-out_dir = "./go"
+protos_dir = "./api/protos"
+out_dir = "./api/go"
 import_dirs = [
-  "./protos",
+  "./api/protos",
   '{{ module "github.com/grpc-ecosystem/grpc-gateway" }}',
   '{{ module "github.com/grpc-ecosystem/grpc-gateway" }}/third_party/googleapis',
 ]
