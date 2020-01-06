@@ -6,8 +6,10 @@ import com.google.api.graphql.rejoiner.SchemaProviderModule
 import com.google.inject.AbstractModule
 import com.google.inject.Guice
 import com.google.inject.Inject
+import dev.izumin.sandbox.rejoiner.bff.client.GitHubUserClientModule
 import dev.izumin.sandbox.rejoiner.bff.client.QiitaItemClientModule
 import dev.izumin.sandbox.rejoiner.bff.client.QiitaUserClientModule
+import dev.izumin.sandbox.rejoiner.bff.schema.GitHubUserSchemaModule
 import dev.izumin.sandbox.rejoiner.bff.schema.QiitaItemSchemaModule
 import dev.izumin.sandbox.rejoiner.bff.schema.QiitaUserSchemaModule
 import graphql.ExecutionInput
@@ -57,12 +59,14 @@ fun Application.module() {
                 override fun configure() {
                     install(QiitaUserSchemaModule())
                     install(QiitaItemSchemaModule())
+                    install(GitHubUserSchemaModule())
                 }
             },
             object : AbstractModule() {
                 override fun configure() {
                     install(QiitaUserClientModule())
                     install(QiitaItemClientModule())
+                    install(GitHubUserClientModule())
                 }
             }
     )
