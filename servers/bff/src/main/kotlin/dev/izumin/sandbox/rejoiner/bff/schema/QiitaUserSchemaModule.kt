@@ -15,7 +15,7 @@ import dev.izumin5210.sandbox.qiita.ListFollowersResponse
 import dev.izumin5210.sandbox.qiita.User
 import dev.izumin5210.sandbox.qiita.UserServiceGrpc
 
-class UserSchemaModule : SchemaModule() {
+class QiitaUserSchemaModule : SchemaModule() {
     @Query("getUser")
     fun getUser(req: GetUserRequest, client: UserServiceGrpc.UserServiceFutureStub): ListenableFuture<User> {
         return client.getUser(req)

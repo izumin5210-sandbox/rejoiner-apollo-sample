@@ -4,7 +4,7 @@ import com.google.inject.AbstractModule
 import dev.izumin5210.sandbox.qiita.ItemServiceGrpc
 import io.grpc.ManagedChannelBuilder
 
-class ItemClientModule : AbstractModule() {
+class QiitaItemClientModule : AbstractModule() {
     companion object {
         const val HOST = "localhost"
         const val PORT = 50051

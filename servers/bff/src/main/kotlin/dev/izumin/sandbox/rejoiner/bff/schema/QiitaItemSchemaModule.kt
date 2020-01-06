@@ -16,7 +16,7 @@ import dev.izumin5210.sandbox.qiita.ListStockersResponse
 import dev.izumin5210.sandbox.qiita.User
 import dev.izumin5210.sandbox.qiita.UserServiceGrpc
 
-class ItemSchemaModule : GrpcSchemaModule() {
+class QiitaItemSchemaModule : GrpcSchemaModule() {
     @Query("listItems")
     fun listItems(req: ListItemsRequest, client: ItemServiceGrpc.ItemServiceFutureStub): ListenableFuture<List<Item>> {
         return Futures.transform(
