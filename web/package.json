@@ -19,7 +19,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "schema:download": "apollo client:codegen --target typescript --endpoint http://localhost:8080/graphql",
+    "schema:codegen": "apollo client:codegen --target typescript --localSchemaFile ./schema.json --includes 'src/**/*.{ts,tsx,graphql}'"
   },
   "eslintConfig": {
     "extends": "react-app"
