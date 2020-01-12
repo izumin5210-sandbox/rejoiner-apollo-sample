@@ -49,7 +49,9 @@ fun Application.module() {
     val port = 8080
 
     install(ContentNegotiation) {
-        gson {}
+        gson {
+            serializeNulls()
+        }
     }
 
     install(CORS) {
