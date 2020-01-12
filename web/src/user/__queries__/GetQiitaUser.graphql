@@ -1,0 +1,21 @@
+fragment User on qiita_User {
+  id
+  name
+  profileImageUrl
+  githubAccount {
+    login
+    avatarUrl
+  }
+}
+
+query GetQiitaUser($userId: String) {
+  getQiitaUser(input: { userId: $userId }) {
+    ...User
+    followees {
+      ...User
+    }
+    followers {
+      ...User
+    }
+  }
+}

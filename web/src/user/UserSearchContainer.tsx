@@ -1,38 +1,12 @@
 import React from "react";
-import { gql } from "apollo-boost";
-import { useQuery } from "@apollo/react-hooks";
+
 import {
-  GetQiitaUser,
-  GetQiitaUserVariables,
-  GetQiitaUser_getQiitaUser
-} from "./__generated__/GetQiitaUser";
-import { User } from "./__generated__/User";
+  useGetQiitaUserQuery,
+  UserFragment,
+  GetQiitaUserQuery
+} from "../generated/graphql";
 
-const QUERY = gql`
-  fragment User on qiita_User {
-    id
-    name
-    profileImageUrl
-    githubAccount {
-      login
-      avatarUrl
-    }
-  }
-
-  query GetQiitaUser($userId: String) {
-    getQiitaUser(input: { userId: $userId }) {
-      ...User
-      followees {
-        ...User
-      }
-      followers {
-        ...User
-      }
-    }
-  }
-`;
-
-const QiitaUserList = ({ users }: { users: User[] }) => {
+const QiitaUserList = ({ users }: { users: UserFragment[] }) => {
   const items = users.map(u => (
     <li>
       <ul>
@@ -57,7 +31,10 @@ const QiitaUserList = ({ users }: { users: User[] }) => {
   return <ul>{items}</ul>;
 };
 
-const QiitaUser = ({ user }: { user: GetQiitaUser_getQiitaUser }) => {
+type Diff<T, U> = T extends U ? never : T;
+type NonNullable<T> = Diff<T, null | undefined>;
+type User = NonNullable<GetQiitaUserQuery["getQiitaUser"]>;
+const QiitaUser = ({ user }: { user: User }) => {
   return (
     <dl>
       <dt>ID</dt>
@@ -77,7 +54,7 @@ const QiitaUser = ({ user }: { user: GetQiitaUser_getQiitaUser }) => {
 };
 
 const UserSearchContainer: React.FC = () => {
-  const { data } = useQuery<GetQiitaUser, GetQiitaUserVariables>(QUERY, {
+  const { data } = useGetQiitaUserQuery({
     variables: { userId: "izumin5210" }
   });
 
