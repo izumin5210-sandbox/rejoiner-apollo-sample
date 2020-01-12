@@ -24,7 +24,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "schema:download": "apollo client:codegen --target typescript --endpoint http://localhost:8080/graphql",
-    "schema:codegen": "apollo client:codegen --target typescript --localSchemaFile ./schema.json --includes 'src/**/*.{ts,tsx,graphql}'"
+    "schema:codegen": "graphql-codegen --config codegen.yml"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -54,6 +54,10 @@
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.17.0",
     "eslint-plugin-react-hooks": "^1.7.0",
-    "prettier": "^1.19.1"
+    "prettier": "^1.19.1",
+    "@graphql-codegen/typescript": "1.11.2",
+    "@graphql-codegen/typescript-operations": "1.11.2",
+    "@graphql-codegen/typescript-react-apollo": "1.11.2",
+    "@graphql-codegen/introspection": "1.11.2"
   }
 }
