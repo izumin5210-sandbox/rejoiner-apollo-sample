@@ -22,8 +22,10 @@ import graphql.schema.GraphQLSchema
 import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.application.install
+import io.ktor.features.CORS
 import io.ktor.features.ContentNegotiation
 import io.ktor.gson.gson
+import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.content.resource
 import io.ktor.http.content.static
@@ -48,6 +50,12 @@ fun Application.module() {
 
     install(ContentNegotiation) {
         gson {}
+    }
+
+    install(CORS) {
+        method(HttpMethod.Post)
+        anyHost()
+        header("content-type")
     }
 
     Guice.createInjector(
