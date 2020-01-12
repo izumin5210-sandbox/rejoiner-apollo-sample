@@ -20,7 +20,7 @@ class GitHubDataLoaderModule : AbstractModule() {
     fun dataLoaderRegistry(userClient: UserServiceGrpc.UserServiceFutureStub): DataLoaderRegistry {
         val userBatchLoader = BatchLoader<String, User> { keys ->
             val req = ListUsersRequest.newBuilder()
-                    .addAllLogins(keys)
+                    .addAllLogins(keys.filterNot { it.isEmpty() })
                     .build()
             val lf: ListenableFuture<List<User?>> =
                     Futures.transform(

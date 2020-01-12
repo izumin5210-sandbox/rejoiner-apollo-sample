@@ -34,12 +34,10 @@ class GitHubUserSchemaModule : SchemaModule() {
 
     @SchemaModification(addField = "githubAccount", onType = dev.izumin5210.sandbox.qiita.User::class)
     fun qiitaUserToGitHubUser(user: dev.izumin5210.sandbox.qiita.User, environment: DataFetchingEnvironment): ListenableFuture<User?> {
-        if (user.githubLoginName.isEmpty()) return FutureConverter.toListenableFuture(null) // FIXME
-
         return FutureConverter.toListenableFuture(
                 environment
                         .getContext<DataLoaderRegistry>()
-                        .getDataLoader<String, User>("github/users")
+                        .getDataLoader<String, User?>("github/users")
                         .load(user.githubLoginName)
         )
     }
