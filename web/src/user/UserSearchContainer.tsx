@@ -31,8 +31,6 @@ const QiitaUserList = ({ users }: { users: UserFragment[] }) => {
   return <ul>{items}</ul>;
 };
 
-type Diff<T, U> = T extends U ? never : T;
-type NonNullable<T> = Diff<T, null | undefined>;
 type User = NonNullable<GetQiitaUserQuery["getQiitaUser"]>;
 const QiitaUser = ({ user }: { user: User }) => {
   return (
