@@ -9,7 +9,6 @@ import com.google.common.util.concurrent.ListenableFuture
 import com.google.common.util.concurrent.MoreExecutors
 import dev.izumin5210.sandbox.github.GetUserRequest
 import dev.izumin5210.sandbox.github.ListUsersRequest
-import dev.izumin5210.sandbox.github.ListUsersResponse
 import dev.izumin5210.sandbox.github.User
 import dev.izumin5210.sandbox.github.UserServiceGrpc
 import graphql.schema.DataFetchingEnvironment
@@ -27,7 +26,7 @@ class GitHubUserSchemaModule : SchemaModule() {
     fun listUsers(req: ListUsersRequest, client: UserServiceGrpc.UserServiceFutureStub): ListenableFuture<List<User>> {
         return Futures.transform(
                 client.listUsers(req),
-                Function { resp: ListUsersResponse? -> resp!!.usersList } ,
+                Function { it!!.usersList },
                 MoreExecutors.directExecutor()
         )
     }

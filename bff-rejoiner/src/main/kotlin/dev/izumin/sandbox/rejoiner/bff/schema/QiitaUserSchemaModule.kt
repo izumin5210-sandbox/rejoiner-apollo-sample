@@ -9,9 +9,7 @@ import com.google.common.util.concurrent.ListenableFuture
 import com.google.common.util.concurrent.MoreExecutors
 import dev.izumin5210.sandbox.qiita.GetUserRequest
 import dev.izumin5210.sandbox.qiita.ListFolloweesRequest
-import dev.izumin5210.sandbox.qiita.ListFolloweesResponse
 import dev.izumin5210.sandbox.qiita.ListFollowersRequest
-import dev.izumin5210.sandbox.qiita.ListFollowersResponse
 import dev.izumin5210.sandbox.qiita.User
 import dev.izumin5210.sandbox.qiita.UserServiceGrpc
 
@@ -26,7 +24,7 @@ class QiitaUserSchemaModule : SchemaModule() {
         val req = ListFolloweesRequest.newBuilder().setUserId(user.id).build()
         return Futures.transform(
                 client.listFollowees(req),
-                Function { resp: ListFolloweesResponse? -> resp!!.usersList },
+                Function { it!!.usersList },
                 MoreExecutors.directExecutor()
         )
     }
@@ -36,7 +34,7 @@ class QiitaUserSchemaModule : SchemaModule() {
         val req = ListFollowersRequest.newBuilder().setUserId(user.id).build()
         return Futures.transform(
                 client.listFollowers(req),
-                Function { resp: ListFollowersResponse? -> resp!!.usersList },
+                Function { it!!.usersList },
                 MoreExecutors.directExecutor()
         )
     }

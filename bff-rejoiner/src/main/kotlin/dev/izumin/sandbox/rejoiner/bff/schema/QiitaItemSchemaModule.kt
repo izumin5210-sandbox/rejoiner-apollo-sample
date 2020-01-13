@@ -10,9 +10,7 @@ import com.google.common.util.concurrent.MoreExecutors
 import dev.izumin5210.sandbox.qiita.Item
 import dev.izumin5210.sandbox.qiita.ItemServiceGrpc
 import dev.izumin5210.sandbox.qiita.ListItemsRequest
-import dev.izumin5210.sandbox.qiita.ListItemsResponse
 import dev.izumin5210.sandbox.qiita.ListStockersRequest
-import dev.izumin5210.sandbox.qiita.ListStockersResponse
 import dev.izumin5210.sandbox.qiita.User
 import dev.izumin5210.sandbox.qiita.UserServiceGrpc
 
@@ -21,7 +19,7 @@ class QiitaItemSchemaModule : GrpcSchemaModule() {
     fun listItems(req: ListItemsRequest, client: ItemServiceGrpc.ItemServiceFutureStub): ListenableFuture<List<Item>> {
         return Futures.transform(
                 client.listItems(req),
-                Function { resp: ListItemsResponse? -> resp!!.itemsList },
+                Function { it!!.itemsList },
                 MoreExecutors.directExecutor()
         )
     }
@@ -37,7 +35,7 @@ class QiitaItemSchemaModule : GrpcSchemaModule() {
         val req = ListStockersRequest.newBuilder().setItemId(item.id).build()
         return Futures.transform(
                 client.listStockers(req),
-                Function { resp: ListStockersResponse? -> resp!!.usersList },
+                Function { it!!.usersList },
                 MoreExecutors.directExecutor()
         )
     }
