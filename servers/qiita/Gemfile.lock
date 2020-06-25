@@ -31,7 +31,7 @@ GEM
       rainbow
       rouge
       slop (< 4.0.0)
-    rack (2.0.8)
+    rack (2.2.3)
     rainbow (3.0.0)
     rouge (3.14.0)
     slop (3.6.0)
